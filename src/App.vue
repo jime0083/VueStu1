@@ -3,37 +3,24 @@
     <h1>Todo管理アプリ</h1>
 
     <!-- タスク入力欄 -->
-    <input v-model="newTask" placeholder="新しいタスク入力">
-    <button @click="addTask">追加</button>
-    <!-- タスクリストの表示 -->
+    <input v-model="todoStore.newTask" placeholder="新しいタスク入力">
+    <button @click="todoStore.addTask">追加</button>
 
+
+    <!-- タスクリストの表示 -->
     <ul>
-      <li v-for="(task,index) in tasks" :key="index">{{ task }}</li>
+      <li v-for="(task,index) in todoStore.tasks" :key="index">{{ task }}</li>
     </ul>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { useTodoStore } from './store/todoStore';
 
 export default{
   setup(){
-    const newTask=ref('');   // 入力された新しいタスク
-    const tasks=ref([]);    // タスクリスト（配列）
-
-    // タスクを追加する関数
-    const newTask=()=>{
-      if(newTask.value.trim() !==''){
-        tasks.value.push(newTask.value);    // 入力値をリストに追加
-        newTask.value='';     // 入力欄をクリア
-      }
-    };
-
-    return{
-      newTask,
-      tasks,
-      addTask
-    };
+    const todoStore=useTodoStore();
+    return{todoStore};
   }
 };
 </script>

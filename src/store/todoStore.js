@@ -8,7 +8,8 @@ export const useTodoStore=defineStore('todo',()=>{
     // タスクを追加する関数
     const addTask=()=>{
         if(newTask.value.trim() !==''){
-            tasks.value.push(newTask.value);
+            // タスクをオブジェクト形式で追加
+            tasks.value.push({text:newTask.value, completed:false});
             newTask.value='';
         }
     };
@@ -18,5 +19,10 @@ export const useTodoStore=defineStore('todo',()=>{
         tasks.value.splice(index,1);
     };
 
-    return{tasks,newTask,addTask,removeTask};
-})
+    // タスクの完了状態を切り替える
+    const toggleTask=(index)=>{
+        tasks.value[index].completed=!tasks.value[index].completed;
+    };
+
+    return{tasks,newTask,addTask,removeTask,toggleTask};
+});

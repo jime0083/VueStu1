@@ -10,7 +10,14 @@
     <!-- タスクリストの表示 -->
     <ul>
       <li v-for="(task,index) in todoStore.tasks" :key="index">
-        {{ task }}
+        <!--  チェックボックス -->
+          <input type="checkbox" :checked="task.completed" @change="todoStore.toggleTask(index)">
+
+        <!--  完了タスク打消し線 -->
+          <span :class="{completed:task.completed}">
+            {{ task.text }}
+          </span>
+
         <!-- 削除ボタン -->
         <button @click="todoStore.removeTask(index)">削除</button>
       </li>
@@ -66,5 +73,11 @@ button {
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   cursor: pointer;
+}
+
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
 }
 </style>

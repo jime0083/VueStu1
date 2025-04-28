@@ -12,5 +12,11 @@ export const useTodoStore=defineStore('todo',()=>{
             newTask.value='';
         }
     };
-    return{tasks,newTask,addTask};
+
+    //追加:タスクを削除する関数
+    const removeTask=(index)=>{
+        tasks.value.splice(index,1);
+    };
+
+    return{tasks,newTask,addTask,removeTask};
 })

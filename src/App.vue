@@ -9,7 +9,11 @@
 
     <!-- タスクリストの表示 -->
     <ul>
-      <li v-for="(task,index) in todoStore.tasks" :key="index">{{ task }}</li>
+      <li v-for="(task,index) in todoStore.tasks" :key="index">
+        {{ task }}
+        <!-- 削除ボタン -->
+        <button @click="todoStore.removeTask(index)">削除</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -51,5 +55,16 @@ li {
   margin: 0.5rem 0;
   padding: 0.5rem;
   border-radius: 4px;
+}
+
+
+button {
+  margin-left: 1rem;
+  background-color: #ff6961;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
 }
 </style>

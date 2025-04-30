@@ -1,7 +1,7 @@
 <template>
     <!-- タスクリストの表示 -->
     <ul>
-        <li v-for="(task,index) in todoStore.tasks" :key="index">
+        <li v-for="(task,index) in todoStore.filteredTasks" :key="index">
         <!--  チェックボックス -->
         <input type="checkbox" :checked="task.completed" @change="todoStore.toggleTask(index)">
 

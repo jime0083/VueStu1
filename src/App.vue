@@ -2,11 +2,13 @@
   <div class="container">
     <h1>Todo管理アプリ</h1>
     <TodoInput />
+    <TodoFilter />
     <TodoList />
   </div>
 </template>
 
 <script setup>
+import TodoFilter from './components/TodoFilter.vue';
 import TodoInput from './components/TodoInput.vue';
 import TodoList from './components/TodoList.vue';
 </script>

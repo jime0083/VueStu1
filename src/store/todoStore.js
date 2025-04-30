@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref,computed } from "vue";
 
 export const useTodoStore=defineStore('todo',()=>{
     const tasks=ref([]);        // タスクリスト（リアクティブ）
     const newTask=ref('');      // 入力された新しいタスク
+    const searchKeyword=ref('');
+    const filter=ref('all');
 
     // タスクを追加する関数
     const addTask=()=>{
@@ -24,5 +26,29 @@ export const useTodoStore=defineStore('todo',()=>{
         tasks.value[index].completed=!tasks.value[index].completed;
     };
 
-    return{tasks,newTask,addTask,removeTask,toggleTask};
+    // 絞り込み済みタスクリスト
+    const filteredTasks=computed(()=>{
+        return tasks.value
+        .filter((task)=>
+        // 検索機能
+            task.text.toLowerCase().includes(searchKeyword.value.toLowerCase())
+        )
+        // 完了か未完了か
+        .filter((task)=>{
+            if(filter.value==='completed') return task.completed;
+            if(filter.value==='active') return !task.completed;
+            return true;
+        });
+    });
+
+    return{
+        tasks,
+        newTask,
+        searchKeyword,
+        filteredTasks,
+        filter,
+        addTask,
+        removeTask,
+        toggleTask,
+    };
 });

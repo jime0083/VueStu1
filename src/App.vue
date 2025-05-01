@@ -1,9 +1,11 @@
 <template>
-  <div class="container">
-    <h1>Todo管理アプリ</h1>
-    <TodoInput />
-    <TodoFilter />
-    <TodoList />
+  <div class="min-h-screen bg-gray-100 flex justify-center items-start py-10">
+    <div class="bg-white w-full max-w-md p-6 rounded shadow">
+      <h1 class="text-2xl font-bold text-center mb-4">Todo管理アプリ</h1>
+      <TodoInput />
+      <TodoFilter />
+      <TodoList />
+    </div>
   </div>
 </template>
 

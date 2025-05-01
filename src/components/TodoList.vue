@@ -1,17 +1,25 @@
 <template>
     <!-- タスクリストの表示 -->
     <ul>
-        <li v-for="(task,index) in todoStore.filteredTasks" :key="index">
+        <li v-for="(task,index) in todoStore.filteredTasks" 
+        :key="index"
+        class="flex justify-between items-center border-b py-2"
+        >
         <!--  チェックボックス -->
-        <input type="checkbox" :checked="task.completed" @change="todoStore.toggleTask(index)">
+        <!-- <input type="checkbox" :checked="task.completed" @change="todoStore.toggleTask(index)"> -->
 
         <!--  完了タスク打消し線 -->
         <span :class="{completed:task.completed}">
             {{ task.text }}
         </span>
 
-        <!-- 削除ボタン -->
-        <button @click="todoStore.removeTask(index)">削除</button>
+        <div class="flex gap-2">
+          <button @click="todoStore.toggleTask(index)" class="text-sm text-green-600 hover:underline">
+            {{ task.completed?'未完了':'完了' }}
+          </button>
+          <!-- 削除ボタン -->
+          <button @click="todoStore.removeTask(index)" class="text-sm text-red-500 hover:underline">削除</button>
+        </div>
         </li>
     </ul>
 </template>

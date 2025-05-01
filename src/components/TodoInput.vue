@@ -1,8 +1,15 @@
 <template>
-    <div class="input-area">
+    <div class="flex gap-2 mb-4">
         <!-- タスク入力欄 -->
-        <input v-model="todoStore.newTask" placeholder="新しいタスク入力">
-        <button @click="todoStore.addTask">追加</button>
+        <input 
+        v-model="todoStore.newTask" 
+        @keyup.enter="todoStore.addTask" 
+        placeholder="新しいタスク入力"
+        class="flex-1 border rounded px-3 py-2"
+        />
+        <button @click="todoStore.addTask" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          追加
+        </button>
     </div>
     <div class="search-area">
       <input v-model="todoStore.searchKeyword" placeholder="検索ワード">

@@ -1,8 +1,18 @@
 <template>
-    <div class="filter-buttons">
-        <button :class="{active:todoStore.filter==='all'}" @click="todoStore.filter='all'">すべて</button>
-        <button :class="{active:todoStore.filter==='active'}" @click="todoStore.filter='active'">未完了</button>
-        <button :class="{active:todoStore.filter==='completed'}" @click="todoStore.filter='completed'">完了</button>
+    <div class="flex gap-2 justify-center mb-4">
+        <button 
+        v-for="type in ['all','active','completed']"
+        :key="type"
+        @click="todoStore.filter=type"
+        :class="[
+          'px-3 py-1 rounded',
+          todoStore.filter===type?'bg-blue-500 text-white':'bg-gray-200 text-gray-700'
+        ]">
+          {{ 
+            type==='all'?'全て':
+            type==='active'?'未完了':'完了'
+            }}
+        </button>
     </div>
 </template>
 

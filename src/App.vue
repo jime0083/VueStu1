@@ -8,9 +8,18 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import TodoFilter from './components/TodoFilter.vue';
 import TodoInput from './components/TodoInput.vue';
 import TodoList from './components/TodoList.vue';
+import { useTodoStore } from './store/todoStore';
+
+const todoStore=useTodoStore();
+
+// アプリ起動時にローカルストレージから読み込み
+onMounted(()=>{
+  todoStore.loadTasksFromStorage();
+});
 </script>
 
 <style scoped>

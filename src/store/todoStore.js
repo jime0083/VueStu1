@@ -1,11 +1,28 @@
 import { defineStore } from "pinia";
-import { ref,computed } from "vue";
+import { ref,computed,watch } from "vue";
 
 export const useTodoStore=defineStore('todo',()=>{
     const tasks=ref([]);        // タスクリスト（リアクティブ）
     const newTask=ref('');      // 入力された新しいタスク
     const searchKeyword=ref('');
     const filter=ref('all');
+
+
+
+    // ローカルストレージから初期値読み込み
+    const loadTasksFromStorage=()=>{
+        const saved=localStorage.getItem('my-tasks');
+        if(saved){
+            tasks.value=JSON.parse(saved);
+        }
+    };
+
+    // tasksが変化したらローカルストレージに保存
+    watch(tasks,(newVal)=>{
+        localStorage.setItem('my-tasks',JSON.stringify(newVal));
+    },{deep:true});
+
+
 
     // タスクを追加する関数
     const addTask=()=>{
@@ -50,5 +67,6 @@ export const useTodoStore=defineStore('todo',()=>{
         addTask,
         removeTask,
         toggleTask,
+        loadTasksFromStorage,
     };
 });
